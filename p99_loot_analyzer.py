@@ -1,7 +1,8 @@
 import re
 
 # Log file to analyze
-LOG_FILE = "eqlog_Halfskeleting_P1999Green.txt"
+# On doit modifier le chemin du fichier de log à analyser en fonction du stockage du project dans un dossier .git et l'emplacement du fichier sur votre système
+LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 
 
 # Fonction pour extraire le nom du monstre tué d'une ligne de log
