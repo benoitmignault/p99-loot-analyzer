@@ -204,10 +204,20 @@ canvas.configure(
 # --- Frame qui contient les cartes ---
 results_frame = tk.Frame(canvas)
 
-canvas.create_window(
+results_window = canvas.create_window(
     (0, 0),
     window=results_frame,
-    anchor="nw"
+    anchor="n"
+)
+
+# On lie l'événement de redimensionnement du canvas pour ajuster la position de la fenêtre des résultats
+canvas.bind(
+    "<Configure>",
+    lambda event: canvas.coords(
+        results_window,
+        event.width / 2,
+        0
+    )
 )
 
 # Chaque fois que results_frame change de dimension, recalcule la zone qui peut être défilée.
