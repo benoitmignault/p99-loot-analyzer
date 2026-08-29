@@ -218,18 +218,15 @@ results_frame.bind(
     )
 )
 
+# On lie l'événement de la molette de la souris pour permettre le défilement avec la molette
 canvas.bind_all(
     "<MouseWheel>",
-    lambda event: canvas.yview_scroll(
-        int(-1 * (event.delta / 120)),
-        "units"
+    # C'est une focntion lamba anonyme qui va appeler la méthode yview_scroll du canvas 
+    # pour faire défiler le canvas en fonction de la direction de la molette de la souris
+    lambda event: canvas.yview_scroll(                
+        # event.delta est un entier qui représente la distance que la molette a été déplacée.
+        int(-1 * (event.delta / 120)), "units"
     )
 )
-
-
-
-
-
-
 
 window.mainloop()
