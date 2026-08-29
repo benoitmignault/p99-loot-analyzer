@@ -34,11 +34,20 @@ def create_monster_card(monster, data, row, column):
     # Positionnement de la carte dans la grille des résultats
     monster_frame.grid(row=row, column=column, padx=10, pady=10, sticky="nsew")
 
-    # Affichage du nom du monstre et du nombre de kills
-    monster_label = tk.Label(monster_frame, text=f"{monster} - Kills : {data['kills']}")    
-    # .pack est utilisé pour empiller les widgets les uns sur les autres, ici on l'utilise pour afficher le nom du monstre et le nombre de kills
-    monster_label.pack(anchor="w", padx=5, pady=2)
+    # Création d'un Frame pour le titre du monstre et le nombre de kills
+    title_frame = tk.Frame(monster_frame)
+    title_frame.pack(fill="x", padx=5, pady=2)
+    
+    # Création d'un label pour le nom du montre dans la section de gauche
+    monster_label = tk.Label(title_frame, text=f"{monster} - Kills :")
+    monster_label.grid(row=0, column=0, sticky="w")
 
+    # Création d'un label pour le nombre de kills dans la section de droite
+    kills_label = tk.Label(title_frame, text=data["kills"],font=("TkDefaultFont", 10, "bold"))
+    kills_label.grid(row=0, column=1, sticky="e")
+    
+    title_frame.grid_columnconfigure(0, weight=1)
+    
     # On ajoute un séparateur pour séparer visuellement le nom du monstre et les informations de loot
     separator = ttk.Separator(monster_frame, orient="horizontal")
     separator.pack(fill="x", padx=5, pady=5)
