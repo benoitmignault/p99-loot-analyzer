@@ -130,6 +130,10 @@ def create_monster_card(monster, data, row, column):
 
 # Function to run the analysis and display results in the GUI
 def run_analysis():
+    
+    # On déclare la variable results comme globale pour pouvoir l'utiliser dans cette fonction
+    global results
+    
     results = analyze_log(LOG_FILE)
 
     # Efface les résultats précédents
