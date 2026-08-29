@@ -195,7 +195,7 @@ run_button = tk.Button(
 export_button = tk.Button(
     window,
     text="Export to CSV",
-    command=lambda: print("Export to CSV functionality not implemented yet")
+    command=run_export_csv
 )
 
 # Pack the button with some padding
