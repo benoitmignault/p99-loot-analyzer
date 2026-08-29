@@ -52,18 +52,23 @@ def create_monster_card(monster, data, row, column):
     money_label.pack(anchor="w", padx=5)    
     
     # Création d'un sous-frame pour l'argent looté afin de les aligner correctement
-    money_frame = tk.Frame(monster_frame)
-    money_frame.pack(anchor="w", padx=5)
+    money_frame = tk.Frame(monster_frame)    
+    # Utilisation de fill="x" pour que le frame prenne toute la largeur disponible et de padx=5 pour ajouter un peu d'espace à gauche et à droite
+    money_frame.pack(fill="x", padx=5)
+    
+    # La colonne des noms prend tout l'espace disponible
+    money_frame.grid_columnconfigure(0, weight=1)
     
     # Pour chaque type de monnaie lootée, on crée un label pour le nom de la monnaie et un autre pour le montant reçu          
     for money_row, (currency, amount) in enumerate(data["money"].items()):
        
         # On crée un label pour le nom qui va être aligner à gauche
-        currency_label = tk.Label(money_frame, text=currency.capitalize())
-        currency_label.grid(row=money_row, column=0)
+        currency_label = tk.Label(money_frame, text=currency)
+        currency_label.grid(row=money_row, column=0, sticky="w")
         
+        # On crée un label pour le montant qui va être aligner à gauche
         amount_label = tk.Label(money_frame, text=amount)
-        amount_label.grid(row=money_row, column=1)
+        amount_label.grid(row=money_row, column=1, sticky="e")
         
 
 # Function to run the analysis and display results in the GUI
