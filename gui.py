@@ -167,16 +167,67 @@ run_button = tk.Button(
 run_button.pack(pady=10)
 
 # --- Conteneur des résultats ---
-results_frame = tk.Frame(window)
-
-# Configure the grid to have two columns with equal weight
-results_frame.grid_columnconfigure(0, weight=1)
-results_frame.grid_columnconfigure(1, weight=1)
-
-results_frame.pack(
+results_container = tk.Frame(window)
+results_container.pack(
+    fill="both",
     expand=True,
     padx=10,
     pady=10
 )
+
+# --- Canvas pour permettre le défilement ---
+canvas = tk.Canvas(results_container)
+
+canvas.pack(
+    side="left",
+    fill="both",
+    expand=True
+)
+
+scrollbar = tk.Scrollbar(
+    results_container,
+    orient="vertical",
+    command=canvas.yview
+)
+
+scrollbar.pack(
+    side="right",
+    fill="y"
+)
+
+canvas.configure(
+    yscrollcommand=scrollbar.set
+)
+
+# --- Frame qui contient les cartes ---
+results_frame = tk.Frame(canvas)
+
+canvas.create_window(
+    (0, 0),
+    window=results_frame,
+    anchor="nw"
+)
+
+# Chaque fois que results_frame change de dimension, recalcule la zone qui peut être défilée.
+results_frame.bind(
+    "<Configure>",
+    lambda event: canvas.configure(
+        scrollregion=canvas.bbox("all")
+    )
+)
+
+canvas.bind_all(
+    "<MouseWheel>",
+    lambda event: canvas.yview_scroll(
+        int(-1 * (event.delta / 120)),
+        "units"
+    )
+)
+
+
+
+
+
+
 
 window.mainloop()
