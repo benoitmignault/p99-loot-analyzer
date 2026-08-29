@@ -1,5 +1,6 @@
 # Import the tkinter library for GUI development
 import tkinter as tk
+from tkinter import ttk
 
 # Import the analyze_log function from the main module
 from main import analyze_log
