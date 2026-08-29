@@ -93,10 +93,6 @@ def run_analysis():
     print(results)
 
 
-
-
-
-
 window = tk.Tk()
 
 window.title("P99 Loot Analyzer")
