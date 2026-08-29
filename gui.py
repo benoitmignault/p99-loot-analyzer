@@ -156,15 +156,23 @@ window.title("P99 Loot Analyzer")
 # Plus mince pour avoir deux cartes et peu espace de chaque bord, mais assez pour voir les cartes et les scrollbars si nécessaire
 window.geometry("550x600")
 
-# --- Bouton ---
+# Bouton pour executer l'analyse du fichier de log et afficher les résultats dans la GUI
 run_button = tk.Button(
     window,
     text="Run Analysis",
     command=run_analysis
 )
 
+# Bouton pour exporter le résultat de l'analyse dans un fichier CSV
+export_button = tk.Button(
+    window,
+    text="Export to CSV",
+    command=lambda: print("Export to CSV functionality not implemented yet")
+)
+
 # Pack the button with some padding
 run_button.pack(pady=10)
+export_button.pack(pady=10)
 
 # --- Conteneur des résultats ---
 main_window = tk.Frame(window)
