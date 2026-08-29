@@ -226,7 +226,7 @@ main_window.pack(
 )
 
 # --- Canvas pour permettre le défilement ---
-# Un canvas est une surface sur lequelle on peut placer des choses ou dessiner
+# Un canvas est une surface sur laquelle on peut placer des choses ou dessiner
 canvas = tk.Canvas(main_window)
 canvas.pack(
     side="left", 
