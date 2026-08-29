@@ -167,8 +167,8 @@ run_button = tk.Button(
 run_button.pack(pady=10)
 
 # --- Conteneur des résultats ---
-results_container = tk.Frame(window)
-results_container.pack(
+main_window = tk.Frame(window)
+main_window.pack(
     fill="both",
     expand=True,
     padx=10,
@@ -176,16 +176,15 @@ results_container.pack(
 )
 
 # --- Canvas pour permettre le défilement ---
-canvas = tk.Canvas(results_container)
-
+canvas = tk.Canvas(main_window)
 canvas.pack(
-    side="left",
-    fill="both",
+    side="left", 
+    fill="both", 
     expand=True
 )
 
 scrollbar = tk.Scrollbar(
-    results_container,
+    main_window,
     orient="vertical",
     command=canvas.yview
 )
