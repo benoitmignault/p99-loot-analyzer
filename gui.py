@@ -195,7 +195,9 @@ run_button = tk.Button(
 export_button = tk.Button(
     window,
     text="Export to CSV",
-    command=run_export_csv
+    command=run_export_csv,
+    # On va setter le bouton d'export à désactivé par défaut, il sera activé une fois que l'analyse aura été faite et que les résultats seront disponibles
+    state="disabled"
 )
 
 # Pack the button with some padding
