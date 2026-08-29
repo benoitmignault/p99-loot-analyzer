@@ -148,6 +148,7 @@ def run_analysis():
     print(results)
 
 
+# Initialisation de la fenêtre principale de l'application
 window = tk.Tk()
 
 window.title("P99 Loot Analyzer")
