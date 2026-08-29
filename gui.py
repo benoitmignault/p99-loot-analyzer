@@ -1,13 +1,19 @@
 # Import the tkinter library for GUI development
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog
+
 
 # Import the analyze_log function from the main module
 from main import analyze_log
 
+# Import the export_csv function from the export module
+from export import export_csv
+
 
 LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 
+# Variable qui sera global une fois son activation faite dans la fonction «run_arun_analysis»
+results = None
 
 # Fonction pour obtenir la couleur associée à chaque type de monnaie
 def get_money_color(currency):
