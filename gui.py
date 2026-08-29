@@ -190,9 +190,11 @@ window.geometry("550x600")
 # --- Conteneur des boutons ---
 button_frame = tk.Frame(window)
 
+# Le .grid() sert à dire où les boutons prennent leur place dans button_frame.
 button_frame.grid_columnconfigure(0, weight=1)
 button_frame.grid_columnconfigure(1, weight=1)
 
+# fill="x" pour que le frame prenne toute la largeur disponible et padx=10, pady=10 pour ajouter un peu d'espace à gauche, à droite, en haut et en bas
 button_frame.pack(fill="x", padx=10, pady=10)
 
 # Bouton pour executer l'analyse du fichier de log et afficher les résultats dans la GUI
