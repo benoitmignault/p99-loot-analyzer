@@ -82,7 +82,7 @@ def create_monster_card(monster, data, row, column):
     
     # Affichage de la monnaie lootée
     if any(amount > 0 for amount in data["money"].values()):
-        
+                
         # Affichage de la monnaie lootée
         money_label = tk.Label(monster_frame, text="Money Looted :")
         money_label.pack(anchor="w", padx=5)    
