@@ -157,10 +157,23 @@ def run_analysis():
         if column == 2:
             column = 0
             row += 1 # ligne suivante
-                
 
-    # Pour l'instant, on va juste vérifier qu'on reçoit bien results
-    print(results)
+
+# Fonction pour exporter les résultats de l'analyse dans un fichier CSV
+def run_export_csv():
+    
+    # On demande à l'utilisateur de choisir un nom de fichier et un emplacement pour enregistrer le fichier CSV
+    filename = filedialog.asksaveasfilename(
+        defaultextension=".csv",
+        filetypes=[
+            ("CSV files", "*.csv"),
+            ("All files", "*.*")
+        ]
+    )
+
+    # On appelle la fonction export_csv pour exporter les résultats dans le fichier CSV choisi par l'utilisateur
+    if results and filename:
+        export_csv(results, filename)
 
 
 # Initialisation de la fenêtre principale de l'application
