@@ -9,6 +9,22 @@ from main import analyze_log
 LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 
 
+# Fonction pour obtenir la couleur associée à chaque type de monnaie
+def get_money_color(currency):
+    
+    if currency == "platinum":
+        return "#e5e4e2"
+    
+    elif currency == "gold":
+        return "gold"
+    
+    elif currency == "silver":
+        return "silver"
+    
+    elif currency == "copper":
+        return "#CD7F32"
+
+
 # Fonction pour créer une carte pour chaque monstre tué et afficher ses informations dans la GUI
 def create_monster_card(monster, data, row, column):
     
@@ -72,9 +88,11 @@ def create_monster_card(monster, data, row, column):
         
         # Pour chaque type de monnaie lootée, on crée un label pour le nom de la monnaie et un autre pour le montant reçu          
         for money_row, (currency, amount) in enumerate(data["money"].items()):
-           
+            
+            color = get_money_color(currency)
+            
             # On crée un label pour le nom qui va être aligner à gauche
-            currency_label = tk.Label(money_frame, text=currency)
+            currency_label = tk.Label(money_frame, text=currency, fg=color)
             currency_label.grid(row=money_row, column=0, sticky="w")
             
             # On crée un label pour le montant qui va être aligner à gauche
