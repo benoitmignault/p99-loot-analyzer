@@ -39,12 +39,15 @@ def create_monster_card(monster, data, row, column):
     title_frame.pack(fill="x", padx=5, pady=2)
     
     # Création d'un label pour le nom du montre dans la section de gauche
-    monster_label = tk.Label(title_frame, text=f"{monster} - Kills :")
+    monster_label = tk.Label(title_frame, text=f"{monster}")
     monster_label.grid(row=0, column=0, sticky="w")
+    
+    monster_statut_kills = tk.Label(title_frame, text="Kills : ", font=("TkDefaultFont", 10))
+    monster_statut_kills.grid(row=0, column=1, sticky="e")
 
     # Création d'un label pour le nombre de kills dans la section de droite
-    kills_label = tk.Label(title_frame, text=data["kills"],font=("TkDefaultFont", 10, "bold"))
-    kills_label.grid(row=0, column=1, sticky="e")
+    kills_label = tk.Label(title_frame, text=data["kills"], font=("TkDefaultFont", 10, "bold"))
+    kills_label.grid(row=0, column=2, sticky="e")
     
     title_frame.grid_columnconfigure(0, weight=1)
     
