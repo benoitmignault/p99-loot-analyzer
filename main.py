@@ -116,7 +116,7 @@ def add_money(results, monster, money):
     
         
 # Fonction pour lire le fichier de log et compter le nombre de fois qu'un monstre spécifique est tué et les items lootés et l'argent reçu
-def analyze_log_file(log_file):
+def analyze_log(log_file):
     
     # On initialise un dictionnaire pour stocker les résultats
     results = {
@@ -203,5 +203,5 @@ def print_results(results):
 # Main execution
 if __name__ == "__main__":
 
-    results = analyze_log_file(LOG_FILE)    
+    results = analyze_log(LOG_FILE)    
     print_results(results)
