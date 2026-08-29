@@ -11,40 +11,55 @@ LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 # Fonction pour créer une carte pour chaque monstre tué et afficher ses informations dans la GUI
 def create_monster_card(monster, data, row, column):
     
-    # Création d'un frame pour chaque monstre tué
-    monster_frame = tk.Frame(
-        results_frame,
-        borderwidth=2,
-        relief="groove"
-    )
+    # Création d'un frame pour chaque monstre tué et l'associer à la grille des résultats
+    monster_frame = tk.Frame(results_frame, borderwidth=2, relief="groove")
 
     # Positionnement de la carte dans la grille des résultats
-    monster_frame.grid(
-        row=row,
-        column=column,
-        padx=10,
-        pady=10
-    )
+    monster_frame.grid(row=row, column=column, padx=10, pady=10)
 
     # Affichage du nom du monstre et du nombre de kills
-    monster_label = tk.Label(monster_frame, text=f"{monster} - Kills: {data['kills']}")
+    monster_label = tk.Label(monster_frame, text=f"{monster} - Kills : {data['kills']}")    
+    # .pack est utilisé pour empiller les widgets les uns sur les autres, ici on l'utilise pour afficher le nom du monstre et le nombre de kills
     monster_label.pack(anchor="w", padx=5, pady=2)
 
     # Affichage des items lootés
-    loot_label = tk.Label(monster_frame, text="Looted Items:")
+    loot_label = tk.Label(monster_frame, text="Looted Items :")
     loot_label.pack(anchor="w", padx=5)
-
-    for item, count in data["loot"].items():
-        item_label = tk.Label(monster_frame, text=f"  {item}: {count}")
-        item_label.pack(anchor="w", padx=15)
     
-    # Affichage de l'argent looté
-    money_label = tk.Label(monster_frame, text="Money Looted:")
-    money_label.pack(anchor="w", padx=5)
+    # Création d'un sous-frame pour les items lootés afin de les aligner correctement
+    loot_frame = tk.Frame(monster_frame)
+    loot_frame.pack(anchor="w", padx=5)
     
-    for currency, amount in data["money"].items():
-        money_item_label = tk.Label(monster_frame, text=f"  {currency.capitalize()}: {amount}")
-        money_item_label.pack(anchor="w", padx=15)
+    # Pour chaque item looté, on crée un label pour le nom de l'item et un autre pour le nombre de fois qu'il a été looté
+    for item_row, (item, count) in enumerate(data["loot"].items()):
+        
+        count = count["count"]
+        # Utilisation de ancre="w" pour aligner le texte à gauche dans le label
+        item_label = tk.Label(loot_frame, text=item, anchor="w")
+        # Utilisation de sticky="w" pour aligner le label à gauche dans la grille
+        item_label.grid(row=item_row, column=0, sticky="w")
+        
+        count_label = tk.Label(loot_frame, text=count)
+        count_label.grid(row=item_row, column=1)
+      
+            
+    # Affichage de la monnaie lootée
+    money_label = tk.Label(monster_frame, text="Money Looted :")
+    money_label.pack(anchor="w", padx=5)    
+    
+    # Création d'un sous-frame pour l'argent looté afin de les aligner correctement
+    money_frame = tk.Frame(monster_frame)
+    money_frame.pack(anchor="w", padx=5)
+    
+    # Pour chaque type de monnaie lootée, on crée un label pour le nom de la monnaie et un autre pour le montant reçu          
+    for money_row, (currency, amount) in enumerate(data["money"].items()):
+       
+        # On crée un label pour le nom qui va être aligner à gauche
+        currency_label = tk.Label(money_frame, text=currency.capitalize())
+        currency_label.grid(row=money_row, column=0)
+        
+        amount_label = tk.Label(money_frame, text=amount)
+        amount_label.grid(row=money_row, column=1)
         
 
 # Function to run the analysis and display results in the GUI
