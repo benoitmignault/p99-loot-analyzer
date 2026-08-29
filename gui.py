@@ -16,7 +16,7 @@ def create_monster_card(monster, data, row, column):
     monster_frame = tk.Frame(results_frame, borderwidth=2, relief="groove")
 
     # Positionnement de la carte dans la grille des résultats
-    monster_frame.grid(row=row, column=column, padx=10, pady=10)
+    monster_frame.grid(row=row, column=column, padx=10, pady=10, sticky="nsew")
 
     # Affichage du nom du monstre et du nombre de kills
     monster_label = tk.Label(monster_frame, text=f"{monster} - Kills : {data['kills']}")    
