@@ -54,31 +54,36 @@ def create_monster_card(monster, data, row, column):
     # On ajoute un séparateur pour séparer visuellement le nom du monstre et les informations de loot
     separator = ttk.Separator(monster_frame, orient="horizontal")
     separator.pack(fill="x", padx=5, pady=5)
-    
-    # Affichage des items lootés
-    loot_label = tk.Label(monster_frame, text="Looted Items :")
-    loot_label.pack(anchor="w", padx=5)
-    
-    # Création d'un sous-frame pour les items lootés afin de les aligner correctement
-    loot_frame = tk.Frame(monster_frame)
-    loot_frame.pack(fill="x", padx=5)
-    
-    # La colonne des noms prend tout l'espace disponible
-    loot_frame.grid_columnconfigure(0, weight=1)
 
-    # Pour chaque item looté, on crée un label pour le nom de l'item et un autre pour le nombre de fois qu'il a été looté
-    for item_row, (item, count) in enumerate(data["loot"].items()):
+    # Vérification si des items ont été lootés pour le monstre, sinon on affiche un message indiquant qu'aucun item n'a été looté
+    if data["loot"]:
         
-        count = count["count"]        
-        # Utilisation de ancre="w" pour aligner le texte à gauche dans le label
-        item_label = tk.Label(loot_frame, text=item)
-        # Utilisation de sticky="w" pour aligner le label à gauche dans la grille
-        item_label.grid(row=item_row, column=0, sticky="w")
+        # Affichage des items lootés
+        loot_label = tk.Label(monster_frame, text="Looted Items :")
+        loot_label.pack(anchor="w", padx=5)
         
-        # Utilisation de ancre="e" pour aligner le texte à droite dans le label
-        count_label = tk.Label(loot_frame, text=count, font=("TkDefaultFont", 10, "bold"))
-        count_label.grid(row=item_row, column=1, sticky="e")
-      
+        # Création d'un sous-frame pour les items lootés afin de les aligner correctement
+        loot_frame = tk.Frame(monster_frame)
+        loot_frame.pack(fill="x", padx=5)
+        
+        # La colonne des noms prend tout l'espace disponible
+        loot_frame.grid_columnconfigure(0, weight=1)
+        
+        # Pour chaque item looté, on crée un label pour le nom de l'item et un autre pour le nombre de fois qu'il a été looté
+        for item_row, (item, count) in enumerate(data["loot"].items()):
+            
+            count = count["count"]  
+            item_label = tk.Label(loot_frame, text=item)
+            # Utilisation de sticky="w" pour aligner le label à gauche dans la grille
+            item_label.grid(row=item_row, column=0, sticky="w")
+            
+            count_label = tk.Label(loot_frame, text=count, font=("TkDefaultFont", 10, "bold"))
+            count_label.grid(row=item_row, column=1, sticky="e")       
+       
+    else:
+        # Si aucun item n'a été looté, on affiche un message indiquant qu'aucun item n'a été looté
+        no_items_label = tk.Label(monster_frame, text="No items looted")
+        no_items_label.pack(anchor="w", padx=5, pady=5) 
      
     separator = ttk.Separator(monster_frame, orient="horizontal")
     separator.pack(fill="x", padx=5, pady=5)
