@@ -176,6 +176,7 @@ main_window.pack(
 )
 
 # --- Canvas pour permettre le défilement ---
+# Un canvas est une surface sur lequelle on peut placer des choses ou dessiner
 canvas = tk.Canvas(main_window)
 canvas.pack(
     side="left", 
@@ -183,6 +184,7 @@ canvas.pack(
     expand=True
 )
 
+# Création de l'object scrollbar et on l'associe au canvas pour permettre le défilement vertical
 scrollbar = tk.Scrollbar(
     main_window,
     orient="vertical",
@@ -194,6 +196,7 @@ scrollbar.pack(
     fill="y"
 )
 
+# On configure le canvas pour qu'il utilise la scrollbar pour le défilement vertical
 canvas.configure(
     yscrollcommand=scrollbar.set
 )
