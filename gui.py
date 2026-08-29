@@ -152,7 +152,9 @@ def run_analysis():
 window = tk.Tk()
 
 window.title("P99 Loot Analyzer")
-window.geometry("800x600")
+
+# Plus mince pour avoir deux cartes et peu espace de chaque bord, mais assez pour voir les cartes et les scrollbars si nécessaire
+window.geometry("550x600")
 
 # --- Bouton ---
 run_button = tk.Button(
