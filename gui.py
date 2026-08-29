@@ -73,7 +73,7 @@ def create_monster_card(monster, data, row, column):
         item_label.grid(row=item_row, column=0, sticky="w")
         
         # Utilisation de ancre="e" pour aligner le texte à droite dans le label
-        count_label = tk.Label(loot_frame, text=count)
+        count_label = tk.Label(loot_frame, text=count, font=("TkDefaultFont", 10, "bold"))
         count_label.grid(row=item_row, column=1, sticky="e")
       
      
@@ -105,7 +105,7 @@ def create_monster_card(monster, data, row, column):
             currency_label.grid(row=money_row, column=0, sticky="w")
             
             # On crée un label pour le montant qui va être aligner à gauche
-            amount_label = tk.Label(money_frame, text=amount)
+            amount_label = tk.Label(money_frame, text=amount, font=("TkDefaultFont", 10, "bold"))
             amount_label.grid(row=money_row, column=1, sticky="e")
     
     else:
