@@ -157,6 +157,9 @@ def run_analysis():
         if column == 2:
             column = 0
             row += 1 # ligne suivante
+    
+    # On peut maintenant activer le bouton d'export pour permettre à l'utilisateur d'exporter les résultats dans un fichier CSV
+    export_button.config(state="normal")
 
 
 # Fonction pour exporter les résultats de l'analyse dans un fichier CSV
