@@ -58,7 +58,7 @@ def create_monster_card(monster, data, row, column):
     
     # Création d'un sous-frame pour les items lootés afin de les aligner correctement
     loot_frame = tk.Frame(monster_frame)
-    loot_frame.pack(anchor="w", padx=5)
+    loot_frame.pack(fill="x", padx=5)
     
     # La colonne des noms prend tout l'espace disponible
     loot_frame.grid_columnconfigure(0, weight=1)
