@@ -165,7 +165,32 @@ def analyze_log(log_file):
             if money:
                 add_money(results, current_monster, money)
                 continue
-                
+      
+    # On va faire un triage des résultats de manière décroissante pour chaque monstre tué, en fonction du nombre de kills
+    results["monsters"] = dict(
+        sorted(
+            results["monsters"].items(), 
+            key=lambda x: x[1]["kills"], 
+            reverse=True
+        )
+    )
+    
+    # On va maintenant faire un triage des items lootés pour chaque monstre tué, en fonction du nombre de loot pour chaque item
+    for monster, data in results["monsters"].items():
+        data["loot"] = dict(
+            sorted(
+                data["loot"].items(), 
+                # Pour chaque élément, regarde cette valeur et utilise-la pour faire le tri.
+                # x    -> ("a Bear Meat", {"count": 6})
+                # x[0] -> "a Bear Meat"
+                # x[1] -> {"count": 6}
+                # x[1]["count"] -> 6
+                # lambda veut dire -> Pour chaque loot : regarde son count et utilise ce count pour déterminer son ordre
+                key=lambda x: x[1]["count"], 
+                reverse=True
+            )
+        )
+              
     return results
 
 
