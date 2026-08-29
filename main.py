@@ -240,5 +240,6 @@ def print_results(results):
 # Main execution
 if __name__ == "__main__":
 
-    results = analyze_log(LOG_FILE)    
+    results = analyze_log(LOG_FILE) 
+    results = sort_results(results)
     print_results(results)
