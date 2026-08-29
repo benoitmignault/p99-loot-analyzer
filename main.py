@@ -8,15 +8,15 @@ LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 # Fonction pour extraire le nom du monstre tué d'une ligne de log
 def extract_slain_monster(line):
     
-    # Situation où le joueur a tué un monstre n'est pas celui qui exécute le script, 
-    # on va extraire le nom du monstre tué à partir de la ligne de log
+    # Situation où le joueur qui roule le script kill le monstre
     if "You have slain " in line:
                 
         # rstrip retire les espaces et les characters fournis en paramètres       
         return line.split("You have slain ")[1].strip().rstrip("!")
 
-    elif " has been slain by " in line:        
-        return line.split(" has been slain by ")[0].strip()
+    # Il va arriver que le joueur ne soit pas celui qui a tué le monstre, mais un autre joueur,
+    elif " has been slain by " in line:     
+        return line.split("] ", 1)[1].split(" has been slain by ", 1)[0].strip()
 
     return None
 
