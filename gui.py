@@ -13,7 +13,7 @@ LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 def get_money_color(currency):
     
     if currency == "platinum":
-        return "#e5e4e2"
+        return "#7f8c8d"  # Gris foncé pour le platine
     
     elif currency == "gold":
         return "gold"
@@ -101,7 +101,7 @@ def create_monster_card(monster, data, row, column):
             color = get_money_color(currency)
             
             # On crée un label pour le nom qui va être aligner à gauche
-            currency_label = tk.Label(money_frame, text=currency, fg=color)
+            currency_label = tk.Label(money_frame, text=currency, fg=color, font=("TkDefaultFont", 10, "bold"))
             currency_label.grid(row=money_row, column=0, sticky="w")
             
             # On crée un label pour le montant qui va être aligner à gauche
