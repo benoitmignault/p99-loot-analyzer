@@ -30,17 +30,21 @@ def create_monster_card(monster, data, row, column):
     loot_frame = tk.Frame(monster_frame)
     loot_frame.pack(anchor="w", padx=5)
     
+    # La colonne des noms prend tout l'espace disponible
+    loot_frame.grid_columnconfigure(0, weight=1)
+
     # Pour chaque item looté, on crée un label pour le nom de l'item et un autre pour le nombre de fois qu'il a été looté
     for item_row, (item, count) in enumerate(data["loot"].items()):
         
-        count = count["count"]
+        count = count["count"]        
         # Utilisation de ancre="w" pour aligner le texte à gauche dans le label
-        item_label = tk.Label(loot_frame, text=item, anchor="w")
+        item_label = tk.Label(loot_frame, text=item)
         # Utilisation de sticky="w" pour aligner le label à gauche dans la grille
         item_label.grid(row=item_row, column=0, sticky="w")
         
+        # Utilisation de ancre="e" pour aligner le texte à droite dans le label
         count_label = tk.Label(loot_frame, text=count)
-        count_label.grid(row=item_row, column=1)
+        count_label.grid(row=item_row, column=1, sticky="e")
       
             
     # Affichage de la monnaie lootée
