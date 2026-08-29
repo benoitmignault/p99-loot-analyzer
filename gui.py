@@ -136,9 +136,11 @@ run_button.pack(pady=10)
 # --- Conteneur des résultats ---
 results_frame = tk.Frame(window)
 
+# Configure the grid to have two columns with equal weight
+results_frame.grid_columnconfigure(0, weight=1)
+results_frame.grid_columnconfigure(1, weight=1)
+
 results_frame.pack(
-    # Étends results_frame horizontalement ET verticalement.
-    fill="both", 
     expand=True,
     padx=10,
     pady=10
