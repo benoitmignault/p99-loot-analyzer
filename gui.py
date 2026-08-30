@@ -1,6 +1,6 @@
 # Import the tkinter library for GUI development
-from fileinput import filename
 import os
+import sys
 import tkinter as tk
 from tkinter import ttk, filedialog
 from tkinter import messagebox
@@ -18,6 +18,19 @@ LOG_FILE = None
 
 # Variable qui sera global une fois son activation faite dans la fonction «run_arun_analysis»
 results = None
+
+
+# Fonction pour obtenir le chemin absolu d'une ressource, que ce soit en mode développement ou en mode exécutable (PyInstaller)
+def resource_path(relative_path):
+    
+    # On vérifie si l'application est exécutée en mode "frozen" (c'est-à-dire empaquetée en un exécutable avec PyInstaller)
+    if getattr(sys, "frozen", False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+
+    return os.path.join(base_path, relative_path)
+
 
 # Fonction pour obtenir la couleur associée à chaque type de monnaie
 def get_money_color(currency):
@@ -228,11 +241,14 @@ def run_export_csv():
 
 # Initialisation de la fenêtre principale de l'application
 window = tk.Tk()
-
 window.title("P99 Loot Analyzer")
 
 # Plus mince pour avoir deux cartes et peu espace de chaque bord, mais assez pour voir les cartes et les scrollbars si nécessaire
 window.geometry("550x600")
+
+# On va chercher le chemin de l'icône pour la fenêtre de l'application
+icon_path = resource_path("eq.ico")
+window.iconbitmap(icon_path)
 
 # --- Conteneur des boutons ---
 button_frame = tk.Frame(window)
