@@ -13,7 +13,8 @@ from main import analyze_log
 from export import export_csv
 
 
-LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
+# Variable globale pour le fichier du fichier de log sélectionné par l'utilisateur
+LOG_FILE = None
 
 # Variable qui sera global une fois son activation faite dans la fonction «run_arun_analysis»
 results = None
