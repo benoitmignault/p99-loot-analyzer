@@ -44,7 +44,6 @@ If you want to run the project from source, Python 3.10 or newer is required.
 
 - Python 3.10 or newer
 - Tkinter
-- Pillow
 
 Clone or Download the Repository:
 
@@ -62,9 +61,6 @@ cd p99-loot-analyzer
 
 Install the required Python package:
 
-```bash
-pip install pillow
-```
 Tkinter is included with most Python installations on Windows.
 
 ## How to Use
