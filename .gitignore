@@ -3,7 +3,10 @@
 
 # Python cache
 __pycache__/
-*.py[cod]
+*.pyc
+build/
+dist/
+*.spec
 
 # Virtual environment
 .venv/
