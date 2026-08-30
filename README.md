@@ -5,22 +5,108 @@ A Python tool for analyzing EverQuest Project 1999 log files and collecting loot
 ## Purpose
 
 The goal of this project is to automate the collection and analysis of loot data from EverQuest Project 1999 log files.
-
 Instead of manually recording every kill and loot, the analyzer reads the EverQuest log and builds structured statistics for each monster encountered.
-
 The collected data can then be used to update loot tables and statistics on the Project 1999 Wiki.
 
 ## Current Features
 
-- Read EverQuest log files
+- Select an EverQuest log file through the graphical interface
+- Validate the selected log file
 - Detect monsters killed
+- Detect kills reported by other players
 - Count kills by monster
 - Detect looted items
 - Count loot by monster
 - Detect money received from corpses
 - Track Platinum, Gold, Silver and Copper
 - Keep loot statistics separated by monster
-- Display collected statistics in the console
+- Sort monsters by number of kills in descending order
+- Sort loot items by quantity in descending order
+- Display collected statistics in a graphical interface
+- Scroll through results using the mouse wheel
+- Export collected statistics to CSV
+
+## Installation
+
+### Requirements
+
+- Python 3.10 or newer
+- Tkinter
+- Pillow
+
+Clone or Download the Repository:
+
+```bash
+git clone https://github.com/benoitmignault/p99-loot-analyzer.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd p99-loot-analyzer
+```
+
+### Install Dependencies
+
+Install the required Python package:
+
+```bash
+pip install pillow
+```
+Tkinter is included with most Python installations on Windows.
+
+## How to Use
+
+1. Start the Application 
+
+```bash
+python gui.py
+```
+
+2. Select an EverQuest Log File
+
+Click the Select Log File button.
+
+The selected file must:
+
+Be a .txt file
+Start with eqlog_
+
+For example: 
+
+`eqlog_Halfskeleting_P1999Green.txt`
+
+
+- Once a valid log file has been selected, the selected character name is displayed on the button and the Run Analysis button becomes available.
+
+3. Run the Analysis
+
+The analyzer processes the selected EverQuest log file and displays the collected statistics.
+Monsters are displayed in descending order according to the number of kills.
+Loot items for each monster are also displayed in descending order according to the quantity looted.
+
+4. Export the Results to CSV
+
+Once the analysis has been completed, click Export CSV.
+Choose the location and filename for the CSV file.
+The CSV contains:
+
+- Monster
+- Number of kills
+- Platinum
+- Gold
+- Silver
+- Copper
+- Looted items
+
+Each unique loot item becomes its own column.
+If a monster did not produce a particular item, the value is set to 0.
+
+For example:
+
+    Monster        | Kills | Platinum | Gold | Silver | Copper | Bear Meat | Grizzly Skin
+    a grizzly bear | 12    | 0        | 2    | 5      | 10     | 6         | 3
+    a kodiak bear  | 8     | 0        | 1    | 3      | 5      | 2         | 0
 
 ## How It Works
 
