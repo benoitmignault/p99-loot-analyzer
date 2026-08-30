@@ -98,7 +98,7 @@ Loot items for each monster are also displayed in descending order according to 
 
 4. Export the Results to CSV
 
-Once the analysis has been completed, click Export CSV.
+Once the analysis has been completed, click Export to CSV.
 Choose the location and filename for the CSV file.
 The CSV contains:
 
