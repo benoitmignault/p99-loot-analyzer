@@ -164,6 +164,10 @@ def run_select_log_file():
     # Le fichier est accepté
     LOG_FILE = filename
     
+    # On va changer le label du bouton pour une partie du fichier de log
+    selected_filename = filename_only.removeprefix("eqlog_").removesuffix(".txt")
+    select_file_button.config(text=f"Selected: {selected_filename}")
+
     # On peut maintenant lancer l'analyse
     run_button.config(state="normal")
     
