@@ -197,19 +197,31 @@ button_frame = tk.Frame(window)
 # Le .grid() sert à dire où les boutons prennent leur place dans button_frame.
 button_frame.grid_columnconfigure(0, weight=1)
 button_frame.grid_columnconfigure(1, weight=1)
+button_frame.grid_columnconfigure(2, weight=1)
 
 # fill="x" pour que le frame prenne toute la largeur disponible et padx=10, pady=10 pour ajouter un peu d'espace à gauche, à droite, en haut et en bas
 button_frame.pack(fill="x", padx=10, pady=10)
+
+# Bouton pour sélectionner le fichier de log d'un personnage
+select_file_button = tk.Button(
+    button_frame,
+    text="Select Log File",
+    command=run_select_log_file
+)
+
+select_file_button.grid(row=0, column=0, sticky="w", padx=5)
 
 # Bouton pour executer l'analyse du fichier de log et afficher les résultats dans la GUI
 run_button = tk.Button(
     button_frame,
     text="Run Analysis",
-    command=run_analysis
+    command=run_analysis,
+    # On va setter le bouton de lancer l'analyse à désactivé par défaut, il sera activé une fois que le fichier de log aura été validé
+    state="disabled"
 )
 
 # On positionne le bouton "Run Analysis" à gauche et le bouton "Export to CSV" à droite, avec un peu d'espace entre les deux
-run_button.grid(row=0, column=0, sticky="e", padx=5)
+run_button.grid(row=0, column=1, sticky="e", padx=5)
 
 # Bouton pour exporter le résultat de l'analyse dans un fichier CSV
 export_button = tk.Button(
@@ -220,7 +232,7 @@ export_button = tk.Button(
     state="disabled"
 )
 
-export_button.grid(row=0, column=1, sticky="w", padx=5)
+export_button.grid(row=0, column=2, sticky="w", padx=5)
 
 # --- Conteneur des résultats ---
 main_window = tk.Frame(window)
