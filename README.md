@@ -81,13 +81,12 @@ Click the Select Log File button.
 
 The selected file must:
 
-Be a .txt file
-Start with eqlog_
+- Be a .txt file
+- Start with eqlog_
 
 For example: 
 
 `eqlog_Halfskeleting_P1999Green.txt`
-
 
 - Once a valid log file has been selected, the selected character name is displayed on the button and the Run Analysis button becomes available.
 
