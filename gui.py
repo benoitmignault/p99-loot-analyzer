@@ -132,8 +132,47 @@ def create_monster_card(monster, data, row, column):
         no_money_label.pack(anchor="w", padx=5, pady=5)
         
 
+# Fonction pour aller chercher le fichier de log sélectionné par l'utilisateur et le stocker dans la variable globale LOG_FILE
+def run_select_log_file():
+
+    global LOG_FILE
+
+    filename = filedialog.askopenfilename(
+        title="Select your EverQuest log file",
+        filetypes=[
+            ("Log files", "*.txt"),
+            ("Text files", "*.txt"),
+            ("All files", "*.*")
+        ]
+    )
+    
+    # Si l'utilisateur n'a pas sélectionné de fichier ou a annulé la sélection, donc on ne fait rien
+    if not filename:        
+        return
+
+    # On extrait le nom du fichier sans le chemin
+    filename_only = os.path.basename(filename)
+
+    # Vérifie que le fichier commence par eqlog_ et se termine par .txt
+    if not filename_only.startswith("eqlog_") or not filename_only.lower().endswith(".txt"):                
+        messagebox.showerror(
+            "Invalid file",
+            "Please select a valid EverQuest log file."
+        )        
+        return    
+
+    # Le fichier est accepté
+    LOG_FILE = filename
+    
+    # On peut maintenant lancer l'analyse
+    run_button.config(state="normal")
+    
+
 # Function to run the analysis and display results in the GUI
 def run_analysis():
+    
+    # On demande à l'utilisateur de choisir un fichier de log d'un de ses personnages
+    global LOG_FILE
     
     # On déclare la variable results comme globale pour pouvoir l'utiliser dans cette fonction
     global results
