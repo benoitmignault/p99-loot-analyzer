@@ -28,6 +28,18 @@ The collected data can then be used to update loot tables and statistics on the 
 
 ## Installation
 
+## For Windows Users
+
+The easiest way to use P99 Loot Analyzer is to download the latest Windows executable from the Releases page.[Lastest release](https://github.com/benoitmignault/p99-loot-analyzer/releases/tag/1.0.1).
+
+Download `P99 Loot Analyzer.exe` and run it directly.
+
+Python does not need to be installed when using the standalone Windows executable.
+
+### For Developers
+
+If you want to run the project from source, Python 3.10 or newer is required.
+
 ### Requirements
 
 - Python 3.10 or newer
@@ -58,6 +70,10 @@ Tkinter is included with most Python installations on Windows.
 ## How to Use
 
 1. Start the Application 
+
+- Windows users: Run `P99 Loot Analyzer.exe`.
+
+- Users running from source:
 
 ```bash
 python gui.py
@@ -237,6 +253,8 @@ This format makes the exported data easy to open and analyze in spreadsheet soft
 ## Project Status
 
 Work in progress.
+
+The current version provides a standalone Windows executable for users who do not have Python installed, as well as the Python source code for developers.
 
 The current version provides a graphical interface for selecting and analyzing EverQuest Project 1999 log files, displaying loot statistics, sorting the results, and exporting the collected data to CSV.
 
