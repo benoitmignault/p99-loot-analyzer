@@ -153,6 +153,7 @@ For example:
 
     Kill Monster A
     Kill Monster B
+
     Loot Monster A
     Loot Monster B
 
@@ -165,8 +166,10 @@ Always follow this sequence:
 
     Kill Monster A
     Loot Monster A
+
     Kill Monster B
     Loot Monster B
+
     Kill Monster C
     Loot Monster C
 
