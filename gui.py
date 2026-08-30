@@ -194,7 +194,12 @@ def run_analysis():
     # On déclare la variable results comme globale pour pouvoir l'utiliser dans cette fonction
     global results
     
-    results = analyze_log(LOG_FILE)
+    # On vérifie si le fichier de log a été sélectionné, sinon on affiche un message d'erreur
+    try:
+        results = analyze_log(LOG_FILE)
+    except OSError as exc:        
+        messagebox.showerror("Analysis failed", str(exc))
+        return
 
     # Efface les résultats précédents
     for widget in results_frame.winfo_children():
