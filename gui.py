@@ -16,7 +16,7 @@ from export import export_csv
 # Variable globale pour le fichier du fichier de log sélectionné par l'utilisateur
 LOG_FILE = None
 
-# Variable qui sera global une fois son activation faite dans la fonction «run_arun_analysis»
+# Variable qui sera global une fois son activation faite dans la fonction «run_analysis»
 results = None
 
 
