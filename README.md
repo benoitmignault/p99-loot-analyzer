@@ -126,6 +126,23 @@ The program identifies:
 
 The information is then stored in a dynamic data structure.
 
+## Monster Kill Detection
+
+The analyzer can detect kills performed by the character generating the log.
+
+Example:
+
+    You have slain a grizzly bear!
+
+The analyzer can also detect kills reported as being performed by another player.
+
+Example:
+
+    a grizzly bear has been slain by Sondardo!
+
+This allows monsters killed by other players to be included in the statistics when their loot and money are visible in the log.
+
+
 ## Data Collection Guidelines
 
 When collecting loot data in a zone containing multiple types of monsters, it is important to fully loot a monster before killing another one.
