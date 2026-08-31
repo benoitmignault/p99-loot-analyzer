@@ -54,7 +54,8 @@ def extract_looted_item(line):
         if item.startswith("a "):
             item = item[2:]
         elif item.startswith("an "):
-            item = item[3:]
+            item = item[3:]        
+        
         return item
 
     # Les items lootés par d'autres joueurs du fichier de log
@@ -67,7 +68,7 @@ def extract_looted_item(line):
         elif item.startswith("an "):
             item = item[3:]
         return item
-
+    
     # Si la ligne ne contient aucun item looté, on retourne None
     return None   
    
