@@ -26,7 +26,10 @@ def export_csv(results, filename):
         "Platinum",
         "Gold",
         "Silver",
-        "Copper"
+        "Copper",
+        # 2026-08-31, on va ajouter le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill pour chaque monstre tué
+        "Total Money",
+        "Average Money"        
     ]
     
     # Étape 4 - Ajouter les colonnes dynamiques pour les items lootés
@@ -53,6 +56,31 @@ def export_csv(results, filename):
                 data["money"]["silver"],
                 data["money"]["copper"]
             ]
+            
+            # Initialisation des variables total_money et average_money pour chaque monstre tué
+            total_money = 0
+            average_money = 0
+            
+            # Étape 7.2 - On va calculer le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill pour chaque monstre tué
+            # Les calculs seront effectués en convertissant l'argent reçu en cuivre pour faciliter les calculs
+            total_money = (
+                data["money"]["platinum"] * 1000 +
+                data["money"]["gold"] * 100 +
+                data["money"]["silver"] * 10 +
+                data["money"]["copper"]
+            )
+            
+            # On va maintenant calculer la moyenne d'argent reçu par kill pour chaque monstre tué si la somme d'argent reçu est supérieure à 0, sinon on mettra la moyenne à 0
+            if total_money > 0:                
+                # On redivise par 1000 pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
+                average_money = ( total_money / data["kills"] ) / 1000
+                
+                # On redivise par 1000 la somme d'argent reçu pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
+                total_money = total_money / 1000                
+            
+            # On va maintenant mettre à jour les colonnes fixes pour le total de l'argent reçu et la moyenne d'argent reçu par kill pour chaque monstre tué
+            row.append(f"{total_money:.3f}")
+            row.append(f"{average_money:.3f}")
             
             # Étape 8 - Pour chaque item looté, on ajoute le nombre de fois qu'il a été looté pour ce monstre, sinon on ajoute 0
             for item in header_item_columns:

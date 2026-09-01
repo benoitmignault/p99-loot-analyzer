@@ -49,13 +49,26 @@ def extract_looted_item(line):
     # Les items lootés par le joueur du fichier de log
     if "You have looted " in line:
         item = line.split("You have looted ")[1].strip().rstrip(".--")
+        
+        # Finalement, on va retirer le "a " ou "an " devant le nom de l'item pour ne garder que le nom de l'item
+        if item.startswith("a "):
+            item = item[2:]
+        elif item.startswith("an "):
+            item = item[3:]        
+        
         return item
 
     # Les items lootés par d'autres joueurs du fichier de log
     elif " has looted " in line:
         item = line.split(" has looted ")[1].strip().rstrip(".--")
+        
+        # Finalement, on va retirer le "a " ou "an " devant le nom de l'item pour ne garder que le nom de l'item
+        if item.startswith("a "):
+            item = item[2:]
+        elif item.startswith("an "):
+            item = item[3:]
         return item
-
+    
     # Si la ligne ne contient aucun item looté, on retourne None
     return None   
    
