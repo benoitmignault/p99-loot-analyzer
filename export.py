@@ -26,7 +26,10 @@ def export_csv(results, filename):
         "Platinum",
         "Gold",
         "Silver",
-        "Copper"
+        "Copper",
+        # 2026-08-31, on va ajouter le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill pour chaque monstre tué
+        "Total Money",
+        "Average Money"        
     ]
     
     # Étape 4 - Ajouter les colonnes dynamiques pour les items lootés
