@@ -78,7 +78,7 @@ def export_csv(results, filename):
                 # On redivise par 1000 la somme d'argent reçu pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
                 total_money = total_money / 1000                
             
-            # On va maintenant mettre à jour les colonnes dynamiques pour le total de l'argent reçu et la moyenne d'argent reçu par kill pour chaque monstre tué
+            # On va maintenant mettre à jour les colonnes fixes pour le total de l'argent reçu et la moyenne d'argent reçu par kill pour chaque monstre tué
             row.append(f"{total_money:.3f}")
             row.append(f"{average_money:.3f}")
             
