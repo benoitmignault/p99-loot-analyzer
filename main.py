@@ -2,6 +2,7 @@ import re
 
 # Log file to analyze
 # On doit modifier le chemin du fichier de log à analyser en fonction du stockage du project dans un dossier .git et l'emplacement du fichier sur votre système
+# Ce chemin est hardocodé à des fins de tests, il faut executer l'interface graphique pour choisir le fichier de log à analyser ou l'executable créé via la distribution
 LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 
 
