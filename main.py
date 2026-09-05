@@ -184,7 +184,7 @@ def analyze_log(log_file):
         # On parcourt chaque ligne du fichier de log
         for line in file:
             
-            # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé
+            # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé de près ou de loin
             # On vérifie si la ligne contient l'information sur un animal charmé dans un premier temps
             if " tells you, 'Attacking " in line and " Master.'" in line:
                                                 
