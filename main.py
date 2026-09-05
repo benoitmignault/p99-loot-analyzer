@@ -15,14 +15,9 @@ def extract_slain_monster(line):
         # rstrip retire les espaces et les characters fournis en paramètres       
         return line.split("You have slain ")[1].strip().rstrip("!")
 
-    # Il va arriver que le joueur ne soit pas celui qui a tué le monstre, mais un autre joueur,
+    # Il va arriver que le joueur ne soit pas celui qui a tué le monstre, mais un autre joueur ou un animal charmé si le joueur est assez proche pour voir le message de monstre tué, on va donc vérifier si la ligne contient " has been slain by " et extraire le nom du monstre tué
     elif " has been slain by " in line:     
         return line.split("] ", 1)[1].split(" has been slain by ", 1)[0].strip()
-    
-    # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé
-    # Le message qu'on doit attraper : A kodiak bear tells you, 'Attacking a grizzly bear Master.'
-    elif " tells you, 'Attacking " in line and " Master.'" in line:
-        return line.split(" tells you, 'Attacking ")[1].split(" Master.'")[0].strip()
 
     return None
 
