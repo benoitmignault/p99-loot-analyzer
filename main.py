@@ -174,40 +174,87 @@ def analyze_log(log_file):
     # On initialise une variable pour garder la trace du monstre actuel
     current_monster = None
     
+    # Variable pour la gestion si un pet fait la job ou en partie
+    pet_active = False
+    pet_target = None
+    
+    print("DEBUG : analyze_log() a commencé", flush=True)
+    
     # On ouvre le fichier de log en lecture
     with open(log_file, "r", encoding="utf-8") as file:
         
         # On parcourt chaque ligne du fichier de log
         for line in file:
+            
+            # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé
+            # On vérifie si la ligne contient l'information sur un animal charmé dans un premier temps
+            if " tells you, 'Attacking " in line and " Master.'" in line:
+                #print(f"DEBUG : Ligne de log avec un pet actif détectée : {line.strip()}", flush=True)
+                                                
+                # Si nous avons le message, on doit resetter les variables du pet car on garde le principe que le pet va tuer un monstre à la fois, 
+                # donc si nous avons un message de pet actif, on va resetter les variables du pet pour le prochain monstre tué
+                if pet_active or pet_target:
+                    pet_active = False
+                    pet_target = None
+                    current_monster = None # Je dois remettre current_monster à None car le pet a tué un monstre et nous devons attendre le prochain message de pet actif pour savoir quel monstre il va tuer ensuite
                 
-            # On vérifie si la ligne contient la situation d'un monstre tué
+                # On extrait le nom de l'attaquant
+                # On extrait le nom de l'attaquant
+                # attacker = line.split(" tells you, 'Attacking ", 1)[0].strip()
+                # On commence par spliter en deux [.....] et le rester de la ligne, puis on split encore une fois pour obtenir le nom de l'attaquant
+                attacker = line.split("] ", 1)[1].split(" tells you, 'Attacking ", 1)[0].strip()
+                #print(f"DEBUG : Attacker: {attacker}", flush=True)   
+                # Seulement un animal charmé, pas le pet d'un joueur qui aura un prénom avec une majuscule, on va vérifier si le premier caractère du nom de l'attaquant est en minuscule
+                if attacker and attacker[0].islower():
+                    pet_active = True
+                    pet_target = line.split(" tells you, 'Attacking ")[1].split(" Master.'")[0].strip()
+                    #print(f"DEBUG : Pet actif détecté : {attacker} avec la cible : {pet_target}", flush=True)            
+            
+            # On vérifie si la ligne contient la situation d'un monstre tué par un joueur ou l'autre ou un animal charmé qu'on est à proximité
             monster = extract_slain_monster(line)
 
             # On ajoute le monstre tué au dictionnaire des résultats, 
             # si le monstre n'existe pas, on le crée et on incrémente le compteur de kills
-            if monster:                
+            if monster:
+                
+                # TODO : 2026-09-05, on doit trouver une maniere ajouter le monstre tué par le animal charmé, si nous sommes trop loin
                 add_monster_kill(results, monster)
                 
                 # On garde ce monstre comme monstre actuel pour garder l'association avec les items lootés et l'argent reçu
                 current_monster = monster
                 continue
             
+            # On va valider si la ligne contient de l'argent reçu ou un item looté.                        
+            # On vérifie si la ligne contient de l'argent reçu
+            money = extract_money(line)
+                        
             # On vérifie si la ligne contient un item looté
             item = extract_looted_item(line)
             
-            # On ajoute l'item looté au dictionnaire des résultats,
-            # si l'item n'existe pas, on le crée et on incrémente le compteur de loot
-            if item:
-                add_looted_item(results, current_monster, item)
-                continue
+            # Si nous avons un item looté ou de l'argent reçu, on va les ajouter au dictionnaire des résultats pour le monstre actuel
+            if item or money:
+                
+                # Situation où le monstre tué est inconnu, mais que le pet est actif et qu'il a un target, on va utiliser le target du pet comme monstre actuel
+                if current_monster is None and pet_active and pet_target:
+                    current_monster = pet_target
+                    
+                    # On doit passer la fonction add_monster_kill pour créer le monstre dans le dictionnaire des résultats, sinon nous allons avoir une erreur car le monstre n'existe pas encore
+                    add_monster_kill(results, current_monster)
 
-            # On vérifie si la ligne contient de l'argent reçu et on prépare le dictionnaire money pour l'ajouter au monstre correspondant
-            money = extract_money(line)
-
-            # On ajoute l'argent reçu au dictionnaire des résultats si elle information est présente, sinon on ne fait rien
-            if money:
-                add_money(results, current_monster, money)
-                continue
+                # On ajoute l'argent reçu au dictionnaire des résultats si elle information est présente, sinon on ne fait rien
+                if money:
+                    add_money(results, current_monster, money)
+                    continue
+                
+                # On ajoute l'item looté au dictionnaire des résultats,
+                # si l'item n'existe pas, on le crée et on incrémente le compteur de loot
+                if item:
+                    add_looted_item(results, current_monster, item)
+                    continue        
+                
+            # Il reste la situation où nous avons un monstre tué, mais aucun item looté ou argent reçu, mais qu'on doit ajouter +1 au kill du monstres
+            # TODO : 2026-09-05, on doit trouver une maniere ajouter le monstre tué par le animal charmé, 
+            # si nous sommes trop loin, mais que nous avons un message de pet actif, on va utiliser le target du pet comme monstre actuel
             
     # On va trier les résultats de manière décroissante pour chaque monstre tué, en fonction du nombre de kills et du nombre d'items lootés
     sort_results(results)   
