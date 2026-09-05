@@ -8,7 +8,7 @@ LOG_FILE = "../eqlog_Halfskeleting_P1999Green.txt"
 
 # Fonction pour extraire le nom du monstre tué d'une ligne de log
 def extract_slain_monster(line):
-    
+
     # Situation où le joueur qui roule le script kill le monstre
     if "You have slain " in line:
                 
