@@ -178,8 +178,6 @@ def analyze_log(log_file):
     pet_active = False
     pet_target = None
     
-    print("DEBUG : analyze_log() a commencé", flush=True)
-    
     # On ouvre le fichier de log en lecture
     with open(log_file, "r", encoding="utf-8") as file:
         
@@ -189,7 +187,6 @@ def analyze_log(log_file):
             # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé
             # On vérifie si la ligne contient l'information sur un animal charmé dans un premier temps
             if " tells you, 'Attacking " in line and " Master.'" in line:
-                #print(f"DEBUG : Ligne de log avec un pet actif détectée : {line.strip()}", flush=True)
                                                 
                 # Si nous avons le message, on doit resetter les variables du pet car on garde le principe que le pet va tuer un monstre à la fois, 
                 # donc si nous avons un message de pet actif, on va resetter les variables du pet pour le prochain monstre tué
@@ -199,16 +196,13 @@ def analyze_log(log_file):
                     current_monster = None # Je dois remettre current_monster à None car le pet a tué un monstre et nous devons attendre le prochain message de pet actif pour savoir quel monstre il va tuer ensuite
                 
                 # On extrait le nom de l'attaquant
-                # On extrait le nom de l'attaquant
-                # attacker = line.split(" tells you, 'Attacking ", 1)[0].strip()
                 # On commence par spliter en deux [.....] et le rester de la ligne, puis on split encore une fois pour obtenir le nom de l'attaquant
                 attacker = line.split("] ", 1)[1].split(" tells you, 'Attacking ", 1)[0].strip()
-                #print(f"DEBUG : Attacker: {attacker}", flush=True)   
+                
                 # Seulement un animal charmé, pas le pet d'un joueur qui aura un prénom avec une majuscule, on va vérifier si le premier caractère du nom de l'attaquant est en minuscule
                 if attacker and attacker[0].islower():
                     pet_active = True
-                    pet_target = line.split(" tells you, 'Attacking ")[1].split(" Master.'")[0].strip()
-                    #print(f"DEBUG : Pet actif détecté : {attacker} avec la cible : {pet_target}", flush=True)            
+                    pet_target = line.split(" tells you, 'Attacking ")[1].split(" Master.'")[0].strip()         
             
             # On vérifie si la ligne contient la situation d'un monstre tué par un joueur ou l'autre ou un animal charmé qu'on est à proximité
             monster = extract_slain_monster(line)
