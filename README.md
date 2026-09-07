@@ -30,7 +30,7 @@ The collected data can then be used to update loot tables and statistics on the 
 
 ## For Windows Users
 
-The easiest way to use P99 Loot Analyzer is to download the latest Windows executable from the Releases page.[Lastest release](https://github.com/benoitmignault/p99-loot-analyzer/releases/tag/1.0.1).
+The easiest way to use P99 Loot Analyzer is to download the latest Windows executable from the Releases page. [Lastest release](https://github.com/benoitmignault/p99-loot-analyzer/releases/tag/1.0.1).
 
 Download `P99 Loot Analyzer.exe` and run it directly.
 
