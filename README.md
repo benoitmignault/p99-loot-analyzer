@@ -44,8 +44,9 @@ If you want to run the project from source, Python 3.10 or newer is required.
 
 - Python 3.10 or newer
 - Tkinter
+- PyInstaller, if you want to build the Windows executable
 
-Clone or Download the Repository:
+### Clone or Download the Repository
 
 ```bash
 git clone https://github.com/benoitmignault/p99-loot-analyzer.git
@@ -62,6 +63,34 @@ cd p99-loot-analyzer
 Install the required Python package:
 
 Tkinter is included with most Python installations on Windows.
+
+```bash
+python -m pip install pyinstaller
+```
+
+### Build the Windows Executable
+
+- `P99 Loot Analyzer.spec`
+
+This file contains the configuration required to build the executable, including:
+
+- The main Python file
+- The application name
+- The Windows executable configuration
+- The application icon
+- The resources included in the executable
+
+- The eq.ico file must be present in the project root.
+
+#### To build the executable, run:
+
+```bash
+python -m PyInstaller --clean "P99 Loot Analyzer.spec"
+```
+
+The executable will be generated in:
+
+- `dist/P99 Loot Analyzer.exe`
 
 ## How to Use
 
@@ -263,9 +292,7 @@ The project is still under active development.
     +-- gui.py
     +-- export.py
     +-- README.md
-    |
-    +-- assets/
-         +-- images/
+    +-- eq.ico
 
 ### main.py
 
