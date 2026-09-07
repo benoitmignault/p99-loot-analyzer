@@ -235,7 +235,7 @@ def analyze_log(log_file):
                     # On doit passer la fonction add_monster_kill pour créer le monstre dans le dictionnaire des résultats, sinon nous allons avoir une erreur car le monstre n'existe pas encore
                     add_monster_kill(results, current_monster)
 
-                # On ajoute l'argent reçu au dictionnaire des résultats si elle information est présente, sinon on ne fait rien
+                # On ajoute l'argent reçu au dictionnaire des résultats si l'information est présente, sinon on ne fait rien
                 if money:
                     add_money(results, current_monster, money)
                     continue
