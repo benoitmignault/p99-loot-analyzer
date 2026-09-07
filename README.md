@@ -115,7 +115,7 @@ The selected file must:
 
 For example: 
 
-`eqlog_Halfskeleting_P1999Green.txt`
+`eqlog_XXXXXXXXXXX_P1999XXXXX.txt`
 
 - Once a valid log file has been selected, the selected character name is displayed on the button and the Run Analysis button becomes available.
 
