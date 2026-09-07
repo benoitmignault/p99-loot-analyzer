@@ -1,0 +1,1 @@
+python -m PyInstaller --clean "P99 Loot Analyzer.spec"
