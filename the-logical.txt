@@ -1,0 +1,24 @@
+You have slain a bandit!
+        ↓
+monster = "a bandit"
+current_monster = "a bandit"
+        ↓
+continue
+        ↓
+PROCHAINE LIGNE
+
+You receive 8 silver...
+        ↓
+current_monster existe encore
+        ↓
+ajoute l'argent à a bandit
+        ↓
+continue
+        ↓
+PROCHAINE LIGNE
+
+You have looted a Bandit Sash.
+        ↓
+current_monster existe encore
+        ↓
+ajoute l'item à a bandit
