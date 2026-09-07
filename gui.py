@@ -253,7 +253,12 @@ window.geometry("550x600")
 
 # On va chercher le chemin de l'icône pour la fenêtre de l'application
 icon_path = resource_path("eq.ico")
-window.iconbitmap(icon_path)
+
+# Recommendation : utiliser un try-except pour gérer les erreurs lors du chargement de l'icône, car certaines plateformes peuvent ne pas supporter le format .ico
+try:
+    window.iconbitmap(icon_path)
+except tk.TclError as e:
+    print(f"Impossible de charger l'icône : {e}")
 
 # --- Conteneur des boutons ---
 button_frame = tk.Frame(window)
