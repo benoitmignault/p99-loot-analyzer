@@ -1,0 +1,24 @@
+You have slain a bandit!
+        ↓
+monster = "a bandit"
+current_monster = "a bandit"
+        ↓
+continue
+        ↓
+NEXT LINE
+
+You receive 8 silver...
+        ↓
+current_monster still exists
+        ↓
+Add the money to a bandit
+        ↓
+continue
+        ↓
+NEXT LINE
+
+You have looted a Bandit Sash.
+        ↓
+current_monster still exists
+        ↓
+Add the item to a bandit
