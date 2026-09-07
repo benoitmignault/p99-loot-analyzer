@@ -193,7 +193,7 @@ def analyze_log(log_file):
                 if pet_active or pet_target:
                     pet_active = False
                     pet_target = None
-                    current_monster = None # Je dois remettre current_monster à None car le pet a tué un monstre et nous devons attendre le prochain message de pet actif pour savoir quel monstre il va tuer ensuite
+                    current_monster = None  # Réinitialise l'état à la détection d'un (nouveau) message "Attacking" du pet; le loot/argent suivants pourront être associés via pet_target
                 
                 # On extrait le nom de l'attaquant
                 # On commence par spliter en deux [.....] et le rester de la ligne, puis on split encore une fois pour obtenir le nom de l'attaquant
