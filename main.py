@@ -96,7 +96,7 @@ def extract_money(line):
     money = {}
     
     # On vérifie si la ligne contient de l'argent reçu d'un cadavre ou d'une répartition de butin et non d'un vendeur ou d'une autre source
-    if "You receive " in line and " from the corpse" in line or "You receive " in line and " as your split " in line:
+    if "You receive " in line and " from the corpse" in line or "You receive " in line and " as your split" in line:
         
         # On définit les différentes monnaies que nous voulons extraire
         currencies = [
@@ -236,7 +236,7 @@ def analyze_log(log_file):
                     add_monster_kill(results, current_monster)
 
                 # On ajoute l'argent reçu au dictionnaire des résultats si l'information est présente, sinon on ne fait rien
-                if money:
+                if money and current_monster is not None:
                     add_money(results, current_monster, money)
                     continue
                 
