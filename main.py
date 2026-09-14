@@ -121,7 +121,7 @@ def extract_money(line):
 
             if match:
                 money[currency] = int(match.group(1))
-    
+                
     # On va retourne le dictionnaire vide ou avec des valeurs
     return money
 
