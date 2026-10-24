@@ -1,3 +1,4 @@
+from os import name
 import re
 
 # Log file to analyze
@@ -22,6 +23,15 @@ def extract_slain_monster(line):
     # Situation où le monstre meurt d'un DoT : aucun tueur n'est nommé dans le message,
     # la ligne se termine simplement par " died." (ex. : an undead reaver died.)
     elif " died." in line:
+        
+        # On va extraire le nom du monstre tué en retirant le " died." à la fin de la ligne
+        name = line.split("] ", 1)[1].removesuffix(" died.").strip()
+        
+        # Un monstre commun commence toujours par "a"/"an" en minuscule ;
+        # une majuscule = nom propre (joueur ou pet mort d'un DoT) : on rejette
+        if name[0].islower():
+            return name
+        
         return line.split("] ", 1)[1].split(" died.", 1)[0].strip()
 
     return None
