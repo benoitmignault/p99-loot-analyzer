@@ -44,26 +44,43 @@ def export_csv(results, filename):
                 data["money"]["copper"]
             )
             
-            # On va maintenant calculer la moyenne d'argent reçu par kill pour chaque monstre tué si la somme d'argent reçu est supérieure à 0, sinon on mettra la moyenne à 0
-            if total_money > 0:                
-                # On redivise par 1000 pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
-                average_money = ( total_money / data["kills"] ) / 1000
+            # On redivise par 1000 pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
+            total_money = total_money / 1000
+            
+            # On calcule la moyenne d'argent reçu par kill pour ce monstre, si le nombre de kills est supérieur à 0
+            average_money = total_money / data["kills"] if data["kills"] > 0 else 0
+            
+            # Étape 4.2 - On prépare les informations du monstre, qui iront sur la première ligne de son bloc
+            monster_row = [
+                monster,
+                data["kills"],
+                data["money"]["platinum"],
+                data["money"]["gold"],
+                data["money"]["silver"],
+                data["money"]["copper"],
+                f"{total_money:.3f}",
+                f"{average_money:.3f}"
+            ]
+            
+            # Étape 4.3 - Une ligne par item looté pour ce monstre
+            if data["loot"]:
                 
-                # On redivise par 1000 la somme d'argent reçu pour avoir l'équivalent de la valeur en platinum avec 3 décimales qui vont représenter les valeurs gold, silver et copper restantes
-                total_money = total_money / 1000                
-            
-            # On va maintenant mettre à jour les colonnes fixes pour le total de l'argent reçu et la moyenne d'argent reçu par kill pour chaque monstre tué
-            row.append(f"{total_money:.3f}")
-            row.append(f"{average_money:.3f}")
-            
-            # Étape 8 - Pour chaque item looté, on ajoute le nombre de fois qu'il a été looté pour ce monstre, sinon on ajoute 0
-            for item in header_item_columns:
-
-                # On va chercher le nombre de fois qu'un item a été looté pour ce monstre, sinon on met 0
-                item_data  = data["loot"].get(item, {"count": 0})
-                count = item_data["count"]
-                row.append(count)
+                # La première ligne du bloc porte les informations du monstre, les suivantes laissent ces colonnes vides
+                first_row = True
                 
-            # Étape 9 - Écrire la ligne
-            writer.writerow(row)
+                for item, item_data in data["loot"].items():
+                    
+                    count = item_data["count"]
+                    
+                    # Le pourcentage de drop de l'item pour ce monstre, avec 1 décimale
+                    drop_rate = (count / data["kills"]) * 100 if data["kills"] > 0 else 0
+                    
+                    if first_row:
+                        writer.writerow(monster_row + [item, count, f"{drop_rate:.1f}"])
+                        first_row = False
+                    else:
+                        writer.writerow(["", "", "", "", "", "", "", "", item, count, f"{drop_rate:.1f}"])
             
+            else:
+                # Aucun item looté pour ce monstre : une seule ligne avec ses informations, sans item
+                writer.writerow(monster_row + ["", 0, ""])
