@@ -14,41 +14,28 @@ def export_csv(results, filename):
         "Gold",
         "Silver",
         "Copper",
-        # 2026-08-31, on va ajouter le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill pour chaque monstre tué
+        # Le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill
         "Total Money",
-        "Average Money"        
+        "Average Money",
+        # Le détail des items lootés : un item par ligne, avec son nombre de fois looté et son pourcentage de drop
+        "Item",
+        "Count",
+        "Drop %"
     ]
     
-    # Étape 4 - Ajouter les colonnes dynamiques pour les items lootés
-    headers.extend(header_item_columns)
-    
-    # Étape 5 - Écrire les données dans le fichier CSV
+    # Étape 2 - Écrire les données dans le fichier CSV
     with open(filename, "w", newline="", encoding="utf-8") as file:        
                 
         # Création de l'object writer pour écrire dans le fichier CSV
         writer = csv.writer(file)
         
-        # Étape 6 - Écrire les en-têtes dans le fichier CSV
+        # Étape 3 - Écrire les en-têtes dans le fichier CSV
         writer.writerow(headers)
         
-        # Étape 7 — Créer une ligne pour chaque monstre
+        # Étape 4 — Créer les lignes pour chaque monstre
         for monster, data in results["monsters"].items():
             
-            # Étape 7.1 - On commence par les colonnes fixes pour chaque monstre : Monster, Kills, platinum, gold, silver, copper     
-            row = [
-                monster,
-                data["kills"],
-                data["money"]["platinum"],
-                data["money"]["gold"],
-                data["money"]["silver"],
-                data["money"]["copper"]
-            ]
-            
-            # Initialisation des variables total_money et average_money pour chaque monstre tué
-            total_money = 0
-            average_money = 0
-            
-            # Étape 7.2 - On va calculer le total de l'argent reçu pour chaque monstre tué et la moyenne d'argent reçu par kill pour chaque monstre tué
+            # Étape 4.1 - On calcule le total de l'argent reçu pour ce monstre tué et la moyenne d'argent reçu par kill
             # Les calculs seront effectués en convertissant l'argent reçu en cuivre pour faciliter les calculs
             total_money = (
                 data["money"]["platinum"] * 1000 +
