@@ -274,14 +274,14 @@ The monster information (name, kills and money) appears only on the first row of
 
 Total Money is the total money looted from the monster, expressed in platinum. Average Money is the average money received per kill, also in platinum. Drop % is the item's drop rate for that monster (count divided by kills), with one decimal.
 
-A monster that dropped no item still gets one row with its information, an empty Item, a Count of 0 and an empty Drop %.
+A monster that dropped no item still gets one row with its information, an empty Item, an empty Count and an empty Drop %.
 
 For example:
 
     Monster,Kills,Platinum,Gold,Silver,Copper,Total Money,Average Money,Item,Count,Drop %
     a pickclaw lookout,19,1,19,26,37,3.197,0.168,Left Goblin Ear,9,47.4
     ,,,,,,,,Bronze Knuckles,2,10.5
-    Xasobtik,1,0,0,0,0,0.000,0.000,,0,
+    Xasobtik,1,0,0,0,0,0.000,0.000,,,
 
 This format makes the exported data easy to open and analyze in spreadsheet software such as Microsoft Excel, without the wide columns of empty values produced by the previous one-item-per-column format.
 
