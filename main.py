@@ -261,6 +261,12 @@ def analyze_log(log_file):
                     # On doit passer la fonction add_monster_kill pour créer le monstre dans le dictionnaire des résultats, sinon nous allons avoir une erreur car le monstre n'existe pas encore
                     add_monster_kill(results, current_monster)
 
+                # Situation où aucun monstre n'est connu (ex. : le log commence au milieu d'un loot,
+                # ou un split d'argent pour un kill survenu avant le début du log) :
+                # on ignore la ligne, sinon add_money/add_looted_item plantent avec un monstre None
+                if current_monster is None:
+                    continue
+
                 # On ajoute l'argent reçu au dictionnaire des résultats si l'information est présente, sinon on ne fait rien
                 if money:
                     add_money(results, current_monster, money)
