@@ -199,6 +199,17 @@ def analyze_log(log_file):
         # On parcourt chaque ligne du fichier de log
         for line in file:
             
+            # Situation où le joueur meurt ou change de zone : la chaîne kill → loot est brisée,
+            # car l'argent et les items reçus ensuite n'ont plus de lien sûr avec le dernier monstre tué
+            # (ex. : le split reçu en lootant son propre corps après une mort).
+            # On réinitialise le monstre actuel et l'état du pet : ce qui suivra sans nouveau kill
+            # sera ignoré plutôt qu'attribué au mauvais monstre
+            if "You have been slain by" in line or "LOADING, PLEASE WAIT" in line or "You have entered" in line:
+                current_monster = None
+                pet_active = False
+                pet_target = None
+
+            
             # 2026-09-05, une situation que je n'avais pas encore prise en compte, c'est lorsque le monstre est tué par un pet charmé de près ou de loin
             # On vérifie si la ligne contient l'information sur un animal charmé dans un premier temps
             if " tells you, 'Attacking " in line and " Master.'" in line:
