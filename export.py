@@ -83,4 +83,4 @@ def export_csv(results, filename):
             
             else:
                 # Aucun item looté pour ce monstre : une seule ligne avec ses informations, sans item
-                writer.writerow(monster_row + ["", 0, ""])
+writer.writerow(monster_row + ["", "", ""])
