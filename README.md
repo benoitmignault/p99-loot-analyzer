@@ -254,9 +254,9 @@ Accurate data collection is important. Users should follow the recommended looti
 
 ## CSV Export Format
 
-The CSV export uses one row per monster.
+The CSV export uses a grouped format: one row per looted item, grouped by monster.
 
-The first columns contain general monster and currency information:
+The columns are fixed:
 
     Monster
     Kills
@@ -264,17 +264,26 @@ The first columns contain general monster and currency information:
     Gold
     Silver
     Copper
+    Total Money
+    Average Money
+    Item
+    Count
+    Drop %
 
-The remaining columns are generated dynamically from the unique loot items found in the analysis.
+The monster information (name, kills and money) appears only on the first row of each monster's block. The following rows leave those columns empty and list one item each, with its count and drop rate.
+
+Total Money is the total money looted from the monster, expressed in platinum. Average Money is the average money received per kill, also in platinum. Drop % is the item's drop rate for that monster (count divided by kills), with one decimal.
+
+A monster that dropped no item still gets one row with its information, an empty Item, a Count of 0 and an empty Drop %.
 
 For example:
 
-    Monster       ,Kills,Platinum,Gold,Silver,Copper,Bear Meat,Grizzly Skin
-    a grizzly bear,12   ,0       ,2   ,5     ,10    ,6        ,3
-    a kodiak bear ,8    ,0       ,1   ,3     ,5     ,2        ,0
+    Monster,Kills,Platinum,Gold,Silver,Copper,Total Money,Average Money,Item,Count,Drop %
+    a pickclaw lookout,19,1,19,26,37,3.197,0.168,Left Goblin Ear,9,47.4
+    ,,,,,,,,Bronze Knuckles,2,10.5
+    Xasobtik,1,0,0,0,0,0.000,0.000,,0,
 
-
-This format makes the exported data easy to open and analyze in spreadsheet software such as Microsoft Excel.
+This format makes the exported data easy to open and analyze in spreadsheet software such as Microsoft Excel, without the wide columns of empty values produced by the previous one-item-per-column format.
 
 ## Project Status
 
