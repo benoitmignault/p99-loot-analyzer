@@ -137,16 +137,18 @@ The CSV contains:
 - Gold
 - Silver
 - Copper
-- Looted items
+- Total Money
+- Average Money
+- Looted items, one per row, with their count and drop rate
 
-Each unique loot item becomes its own column.
-If a monster did not produce a particular item, the value is set to 0.
+The format is grouped by monster: the monster information appears only on the first row of each monster's block, and each following row lists one looted item.
 
 For example:
 
-    Monster        | Kills | Platinum | Gold | Silver | Copper | Bear Meat | Grizzly Skin
-    a grizzly bear | 12    | 0        | 2    | 5      | 10     | 6         | 3
-    a kodiak bear  | 8     | 0        | 1    | 3      | 5      | 2         | 0
+    Monster,Kills,Platinum,Gold,Silver,Copper,Total Money,Average Money,Item,Count,Drop %
+    a pickclaw lookout,19,1,19,26,37,3.197,0.168,Left Goblin Ear,9,47.4
+    ,,,,,,,,Bronze Knuckles,2,10.5
+    ,,,,,,,,Ale,1,5.3
 
 ## How It Works
 
