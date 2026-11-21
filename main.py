@@ -22,19 +22,19 @@ def extract_slain_monster(line):
     
     # Situation où le monstre meurt d'un DoT : aucun tueur n'est nommé dans le message,
     # la ligne se termine simplement par " died." (ex. : an undead reaver died.)
-    elif " died." in line:
-        
+    elif line.rstrip().endswith(" died."):
+            
         # On va extraire le nom du monstre tué en retirant le " died." à la fin de la ligne
-        name = line.split("] ", 1)[1].removesuffix(" died.").strip()
-        
+        # Attention : la ligne lue du fichier se termine par un saut de ligne (\n),
+        # il faut donc nettoyer la ligne AVANT de retirer le suffixe, sinon il n'est jamais reconnu
+        name = line.split("] ", 1)[1].strip().removesuffix(" died.")
+            
         # Un monstre commun commence toujours par "a"/"an" en minuscule ;
         # une majuscule = nom propre (joueur ou pet mort d'un DoT) : on rejette
-        if name[0].islower():
+        if name and name[0].islower():
             return name
-        
-        return line.split("] ", 1)[1].split(" died.", 1)[0].strip()
-
-    return None
+            
+        return None
 
 
 # Fonction pour vérifier si le monstre est déjà dans le dictionnaire, sinon on crée sa structure et on incrémente le compteur de kills
