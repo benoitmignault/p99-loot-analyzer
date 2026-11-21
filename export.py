@@ -2,24 +2,11 @@ import csv
 
 # Fonction pour exporter les résultats au format CSV
 # Cette fonction sera appeller par le GUI et son bouton "Export to CSV"
+# Format groupé : une ligne par item looté ; les informations du monstre (kills, argent)
+# apparaissent seulement sur la première ligne de son bloc, les lignes suivantes laissent ces colonnes vides
 def export_csv(results, filename):
     
-    # Une liste des colonnes dynamiques pour les items lootés, on va les ajouter après les colonnes fixes
-    # set conserve uniquement les valeurs uniques, donc si un item est looté plusieurs fois, 
-    # il ne sera ajouté qu'une seule fois à la liste des colonnes dynamiques
-    header_item_columns = set()
-            
-    # Étape 1 — trouver les colonnes d'items
-    for monster, data in results["monsters"].items():
-
-        # On va déterminer les colonnes dynamiques pour les items lootés, on va les ajouter après les colonnes fixes
-        for item in data["loot"].keys():
-            header_item_columns.add(item)            
-    
-    # Étape 2 - Trier les colonnes d'items pour qu'elles apparaissent dans un ordre cohérent dans le fichier CSV
-    header_item_columns = sorted(header_item_columns)
-    
-    # Étape 3 - Créer les colonnes fixes du CSV
+    # Étape 1 - Créer les colonnes du CSV : les informations du monstre, puis le détail de chaque item looté
     headers = [
         "Monster",
         "Kills",
