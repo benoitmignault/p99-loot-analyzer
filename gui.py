@@ -5,7 +5,6 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 from tkinter import messagebox
 
-
 # Import the analyze_log function from the main module
 from main import analyze_log
 
@@ -18,7 +17,6 @@ LOG_FILE = None
 
 # Variable qui sera global une fois son activation faite dans la fonction «run_analysis»
 results = None
-
 
 # Fonction pour obtenir le chemin absolu d'une ressource, que ce soit en mode développement ou en mode exécutable (PyInstaller)
 def resource_path(relative_path):
